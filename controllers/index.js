@@ -11,11 +11,25 @@ router.get('/', function(req, res, next) {
 });
 
 
-
+router.get('/home', renderHome)
 router.post('/login/verify', attemptToLogin);
 router.get('/form', renderForm);
 router.get('/login', renderLogin);
 router.post('/create', attemptToRegister, insertIntoUserAccountsTable);
+
+
+
+function renderHome(req, res, next){
+
+  console.log(req.session)
+  FormModel.where('email', req.session.theResultsFromOurModelInsertion).fetch().then(
+      function(result) {
+    console.log(result)
+        res.json({result});
+      });
+
+  res.render('home', {})
+}
 
 function renderForm(req, res, next) {
   res.render('form', {});
@@ -39,7 +53,7 @@ function insertIntoUserAccountsTable(req, res, next) {
 
 
 function attemptToRegister(req, res, next) {
-  console.log(req.body);
+  console.log(req.session);
   var password = req.body.password_hash;
   var hashedPassword = createPasswordHash(password);
   var account = new FormModel({
@@ -47,7 +61,9 @@ function attemptToRegister(req, res, next) {
     email: req.body.email,
     password_hash: hashedPassword
   }).save().then(function(result) {
-    res.render('home');
+    req.session.theResultsFromOurModelInsertion = result.attributes.email;
+    console.log(result.attributes.email);
+   res.redirect('/home')
   });
 };
 
@@ -71,6 +87,8 @@ function attemptToLogin(req, res, next) {
         res.json({'is_logged_in': attempt});
       });
 };
+
+
 
 
 
