@@ -1,1 +1,27 @@
-Welcome {{name}}! You have logged in!
+<h1>Welcome to RSVP, {{name}}!</h1> <br><h3>You have logged in!</h3>
+
+
+<div>
+
+    <h2>Your place to get the party started!</h2>
+
+    <form action="/createevent" method="post">
+        <input type="text" name="event_name" placeholder="Your Event" required> <br><br>
+        <input type="date" name="start_date" placeholder="Event Start Date" required><br><br>
+        <input type="date" name="end_date" placeholder="Event Start Date" required><br><br>
+        <input type="time" name="start_time" placeholder="Event Start Time" required><br><br>
+        <input type="time" name="end_time" placeholder="Event End Time" required><br><br>
+        <input type="text" name="description" placeholder="Event Description" required> <br><br>
+        <input type="text" name="location" placeholder="Your Event's Location" required> <br><br>
+        <input type="submit" value="Book Your Event!"></input>
+    </form>
+    <!--<input type="button" value="Don't show this again! " onclick="fbLikeDump();WriteCookie();" />-->
+<!--</div>-->
+
+<!--<h1>Welcome back to RSVP!</h1>-->
+
+<!--<form action="/login/verify" method="post">-->
+    <!--<input type="text" name="email" placeholder="email" required> <br><br>-->
+    <!--<input type="password" name="password_hash" placeholder="password" required><br><br>-->
+    <!--<input type="submit" value="Sign In!"></input>-->
+<!--</form>-->
