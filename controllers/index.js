@@ -18,6 +18,17 @@ router.get('/login', renderLogin);
 //Home Page
 router.get('/home', renderHome);
 
+router.get('/logout', function (req, res) {
+  req.session = null;
+  res.send([
+    'You are now logged out.',
+    '&lt;br/>',
+    res.redirect('/login')
+  ].join(''));
+});
+
+router.get('/all', renderAll);
+
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
 
@@ -28,9 +39,11 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 router.post('/createevent', insertIntoEventsTable);
 
 
+
+
 //Function for RenderHome: Creates session using email field
 function renderHome(req, res, next){
-  console.log(req.session);
+
   RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
       function(result) {
     console.log(result.attributes);
@@ -50,6 +63,7 @@ function renderRegister(req, res, next) {
 
 //Function for renderLogin: Displays Login Form for returning users
 function renderLogin(req, res, next) {
+  console.log(req.session)
   res.render('login', {});
 }
 
@@ -84,6 +98,7 @@ function attemptToRegister(req, res, next) {
     email: req.body.email,
     password_hash: hashedPassword
   }).save().then(function(result) {
+
     req.session.theResultsFromOurModelInsertion = result.attributes.email;
     console.log(result.attributes.email);
    res.redirect('/home')
@@ -93,6 +108,27 @@ function attemptToRegister(req, res, next) {
     res.render('registerfail');
   });
 }
+
+
+function attemptToRegister(req, res, next) {
+    console.log(req.session);
+    var password = req.body.password_hash;
+    var hashedPassword = createPasswordHash(password);
+    var account = new RegisterModel({
+        name: req.body.name,
+        email: req.body.email,
+        password_hash: hashedPassword
+    }).save().then(function(result) {
+        req.session.theResultsFromOurModelInsertion = result.attributes.email;
+        console.log(result.attributes.email);
+        res.redirect('/home')
+    })
+        .catch(function(error) {
+            console.log(error)
+            res.render('registerfail');
+        });
+}
+
 
 
 //Function createPasswordHash:Used to salt password and create hashed password
@@ -110,9 +146,10 @@ function comparePasswordHashes (input, db) {
 //Function attemptToLogin: Confirms compared passwords and returns results
 function attemptToLogin(req, res, next) {
   var password = req.body.password_hash;
-  RegisterModel.where('email', req.body.email).fetch().then(
+  RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
       function (result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
+
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
         if (attempt === true) {
           res.redirect('/home');
@@ -125,5 +162,29 @@ function attemptToLogin(req, res, next) {
 
 
 }
+
+
+function sanitizeModelsToJsonArray(dbModels) {
+  var ret = [];
+  var models = dbModels.models;
+  for (var item in models) {
+    var row = models[item];
+    var attrs = row.attributes;
+    ret.push(attrs);
+  }
+  return ret;
+};
+
+
+function renderAll(req, res, next) {
+  EventModel.collection().fetch().then(function(models) {
+    var sanitizeModels = sanitizeModelsToJsonArray(models);
+    var resJson = {
+      events: sanitizeModels
+    };
+    res.render('all', resJson);
+  });
+};
+
 
 module.exports = router;
