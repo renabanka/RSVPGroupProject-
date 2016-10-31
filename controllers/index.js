@@ -105,10 +105,10 @@ function attemptToRegister(req, res, next) {
    res.redirect('/home')
   })
 .catch(function(error) {
-    console.log(error)
+    console.log(error);
     res.render('registerfail');
 
-    res.redirect('/home')
+    // res.redirect('/home')
 
   });
 }
@@ -159,7 +159,7 @@ function attemptToLogin(req, res, next) {
           res.redirect('/home');
         }
         else {
-          res.redirect('loginfail')
+          res.redirect('/loginfail');
         }
         // res.json({'is_logged_in': attempt});
       });
