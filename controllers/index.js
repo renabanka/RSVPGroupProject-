@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var RegisterModel = require('../models/Register');
+var EventModel = require('../models/Event');
 var bcrypt = require('bcryptjs');
 
 
@@ -20,6 +21,9 @@ router.post('/login/verify', attemptToLogin);
 
 //Successful Register Page
 router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
+
+//Event created and entered in events table
+router.post('/createevent', insertIntoEventsTable);
 
 
 //Function for RenderHome: Creates session using email field
@@ -55,6 +59,18 @@ function insertIntoUserAccountsTable(req, res, next) {
     res.render('home', data.attributes);
   });
 }
+
+//function insertIntoEventsTable: inputs event details into our events table
+  function insertIntoEventsTable(req, res, next) {
+    console.log(req.body);
+
+  var event = new EventModel(req.body).save().then(function(data) {
+    res.render('userprofile', data.attributes);
+  });
+}
+
+
+
 
 //Function attemptToRegister: Creates NEW registerModel and creates email as session identifier
 function attemptToRegister(req, res, next) {
@@ -95,6 +111,7 @@ function attemptToLogin(req, res, next) {
   RegisterModel.where('email', req.body.email).fetch().then(
       function(result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
+<<<<<<< HEAD
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
         if (attempt === true) {
           res.redirect('/home');
@@ -103,6 +120,11 @@ function attemptToLogin(req, res, next) {
           res.render('loginfail')
         }
         // res.json({'is_logged_in': attempt});
+=======
+        // res.json({'is_logged_in': attempt});
+        res.redirect('/home')//need to redirect the page and user to user profile
+
+>>>>>>> b7d6a4a3711991c29143608c935276be28cc0761
       });
 }
 

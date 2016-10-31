@@ -44,7 +44,7 @@ console.log(res);
 
 gulp.task('db_create_events_attendance_table', function () {
     var sqlString = "create table event_attendance (" +
-    "id int not null auto_increment,"
+    "id int not null auto_increment," +
     "evtref int not null references events(id)," +
     "uref int not null references users(addid)," +
     "status VARCHAR(255) not null," +
