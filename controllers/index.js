@@ -3,6 +3,7 @@ var router = express.Router();
 var RegisterModel = require('../models/Register');
 var EventModel = require('../models/Event');
 var bcrypt = require('bcryptjs');
+var patch = require('node-patch');
 
 
 //Initial Page
@@ -17,6 +18,7 @@ router.get('/login', renderLogin);
 
 //Home Page
 router.get('/home', renderHome);
+router.get('/all', renderAll);
 
 router.get('/logout', function (req, res) {
   req.session = null;
@@ -27,7 +29,11 @@ router.get('/logout', function (req, res) {
   ].join(''));
 });
 
-router.get('/all', renderAll);
+// router.get('/home', renderAll);
+router.get('/createevent', function(req, res, next) {
+    res.render('createevent', {});
+});
+
 
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
@@ -38,6 +44,14 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 //Event created and entered in events table
 router.post('/createevent', insertIntoEventsTable);
 
+
+
+
+// router.patch('', function (req, res) {
+//     var updateObject = req.body; // {last_name : "smith", age: 44}
+//     var id = req.params.id;
+//     db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
+// });
 
 
 
@@ -53,6 +67,16 @@ function renderHome(req, res, next){
         console.log(error)
       });
 }
+
+function renderAll(req, res, next) {
+    EventModel.collection().fetch().then(function(models) {
+        var sanitizeModels = sanitizeModelsToJsonArray(models);
+        var resJson = {
+            events: sanitizeModels
+        };
+        res.render('home', resJson);
+    });
+};
 
 
 //Function for renderRegister: Displays Register Form for new users
@@ -131,9 +155,6 @@ function attemptToLogin(req, res, next) {
     RegisterModel.where({email: req.body.email}).fetch().then(
       function (result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
-          console.log('------------------------------------------------------')
-          console.log(attempt, ' this is the attempt value')
-          console.log('------------------------------------------------------')
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
           if (attempt === true) {
               res.redirect('/home');
@@ -145,7 +166,6 @@ function attemptToLogin(req, res, next) {
       });
 
 }
-
 
 
 function sanitizeModelsToJsonArray(dbModels) {
@@ -160,15 +180,6 @@ function sanitizeModelsToJsonArray(dbModels) {
 };
 
 
-function renderAll(req, res, next) {
-  EventModel.collection().fetch().then(function(models) {
-    var sanitizeModels = sanitizeModelsToJsonArray(models);
-    var resJson = {
-      events: sanitizeModels
-    };
-    res.render('all', resJson);
-  });
-};
 
 
 module.exports = router;

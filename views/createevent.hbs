@@ -1,45 +1,35 @@
 <nav class="light-blue lighten-1" role="navigation">
-<div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">RSVP</a>
-<ul class="right hide-on-med-and-down">
-    <li><a href="/logout">Logout</a></li>
-    <li><a href="/home">Home</a></li>
+    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">RSVP</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/home">Home</a></li>
 
-</ul>
+        </ul>
 
-<ul id="nav-mobile" class="side-nav">
-<li><a href="/logout">Logout</a></li>
-<li><a href="/home">Home</a></li>
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/home">Home</a></li>
 
-</ul>
-<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-</div>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
 </nav>
 
-<section>
-    <button><a href="/createevent">Create Event</button>
-    <button><a href="/home">My Events</button>
+<div>
 
-    welcome, {{name}}
+    <p>RSVP is your place to get your party started!</p>
 
-</section>
-
-
-
-
-
-<!--{{#each events}}-->
-
-
-        <p>Event Name: {{this.event_name}}</p>
-        <p>Start Date: {{this.start_date}}</p>
-        <p>End Date: {{this.end_date}}</p>
-        <p>Start Time: {{this.start_time}}</p>
-        <p>End Time: {{this.end_time}}</p>
-        <p>Description: {{this.description}}</p>
-        <p>Location: {{this.location}}</p>
-
-
-{{/each}}
+    <form action="/createevent" method="post">
+        <input type="text" name="event_name" placeholder="Event Name" required> <br><br>
+        <input type="date" name="start_date" placeholder="Event Start Date" required><br><br>
+        <input type="date" name="end_date" placeholder="Event End Date" required><br><br>
+        <input type="time" name="start_time" placeholder="Event Start Time" required><br><br>
+        <input type="time" name="end_time" placeholder="Event End Time" required><br><br>
+        <input type="text" name="description" placeholder="Event Description" required> <br><br>
+        <input type="text" name="location" placeholder="Your Event's Location" required> <br><br>
+        <input type="submit" value="Create Your Event!"></input>
+    </form>
+</div>
 
 
 <footer class="page-footer orange">
