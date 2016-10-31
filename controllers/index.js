@@ -69,6 +69,10 @@ function attemptToRegister(req, res, next) {
     req.session.theResultsFromOurModelInsertion = result.attributes.email;
     console.log(result.attributes.email);
    res.redirect('/home')
+  })
+.catch(function(error) {
+    console.log(error)
+    res.render('registerfail');
   });
 }
 
@@ -91,7 +95,14 @@ function attemptToLogin(req, res, next) {
   RegisterModel.where('email', req.body.email).fetch().then(
       function(result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
-        res.json({'is_logged_in': attempt});
+        req.session.theResultsFromOurModelInsertion = result.attributes.email;
+        if (attempt === true) {
+          res.redirect('/home');
+        }
+        else {
+          res.render('loginfail')
+        }
+        // res.json({'is_logged_in': attempt});
       });
 }
 
