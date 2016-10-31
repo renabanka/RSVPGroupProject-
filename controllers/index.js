@@ -33,7 +33,7 @@ function renderHome(req, res, next){
   console.log(req.session);
   RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
       function(result) {
-    console.log(result.attributes);
+        console.log(result.attributes);
         res.render('home' , result.attributes);
       })
       .catch(function(error) {
@@ -63,8 +63,8 @@ function insertIntoUserAccountsTable(req, res, next) {
 }
 
 //function insertIntoEventsTable: inputs event details into our events table
-  function insertIntoEventsTable(req, res, next) {
-    console.log(req.body);
+function insertIntoEventsTable(req, res, next) {
+  console.log(req.body);
 
   var event = new EventModel(req.body).save().then(function(data) {
     res.render('userprofile', data.attributes);
@@ -86,11 +86,15 @@ function attemptToRegister(req, res, next) {
   }).save().then(function(result) {
     req.session.theResultsFromOurModelInsertion = result.attributes.email;
     console.log(result.attributes.email);
+
    res.redirect('/home')
   })
 .catch(function(error) {
     console.log(error)
     res.render('registerfail');
+
+    res.redirect('/home')
+
   });
 }
 
