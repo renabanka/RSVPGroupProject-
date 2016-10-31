@@ -76,6 +76,15 @@ gulp.task('db_drop_events_table', function() {
 });
 
 
+gulp.task('db_drop_events_attendance_table', function() {
+    var sqlString = "drop table event_attendance;";
+    //callback(response)
+    function cb(res) {
+        console.log(res);
+    }
+    db.raw(sqlString).then(cb);
+    //db.raw(query).then(callback)
+});
 
 
 

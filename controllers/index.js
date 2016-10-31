@@ -11,8 +11,10 @@ router.get('/', function(req, res, next) {
 });
 //Register Page
 router.get('/register', renderRegister);
+
 //Login Page for Returning Users
 router.get('/login', renderLogin);
+
 //Home Page
 router.get('/home', renderHome);
 
@@ -109,25 +111,19 @@ function comparePasswordHashes (input, db) {
 function attemptToLogin(req, res, next) {
   var password = req.body.password_hash;
   RegisterModel.where('email', req.body.email).fetch().then(
-      function(result) {
+      function (result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
-<<<<<<< HEAD
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
         if (attempt === true) {
           res.redirect('/home');
         }
         else {
-          res.render('loginfail')
+          res.redirect('loginfail')
         }
         // res.json({'is_logged_in': attempt});
-=======
-        // res.json({'is_logged_in': attempt});
-        res.redirect('/home')//need to redirect the page and user to user profile
-
->>>>>>> b7d6a4a3711991c29143608c935276be28cc0761
       });
+
+
 }
-
-
 
 module.exports = router;
