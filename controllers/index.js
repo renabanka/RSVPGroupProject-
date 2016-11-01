@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var RegisterModel = require('../models/Register');
-var EventModel = require('../models/Event');
+var EventModel = require('../models/EventAttendance');
+var User = require('../models/Register');
 var bcrypt = require('bcryptjs');
 var patch = require('node-patch');
 
@@ -34,7 +35,13 @@ router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });
 
+router.get('/EventAttendance', function(req, res, next) {
+    User.where({id:1}).fetch({withRelated: ['users_accounts']})
+        .then(function(user){
+            res.json(user.related('event_attendance'))
+        })
 
+})
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
 

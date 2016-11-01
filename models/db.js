@@ -1,4 +1,4 @@
-require('dotenv').config(); //# dot-env
+
 var db = require('knex')({	//# knex
     client: 'mysql',
     connection: {
@@ -9,4 +9,8 @@ var db = require('knex')({	//# knex
     }
 });
 
-module.exports = db;
+var bookshelf = require('bookshelf')(db)
+
+bookshelf.plugin('registry')
+
+module.exports = bookshelf;
