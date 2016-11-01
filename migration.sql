@@ -1,6 +1,6 @@
 create database RSVP;
 
-create table user_accounts (
+create table users (
     id int not null auto_increment,
     name varchar(255) not null,
     email varchar(255) not null unique,
@@ -23,8 +23,8 @@ create table events (
 
 create table event_attendance (
     id int not null auto_increment,
-    evtref int not null references events(id),
-    uref int not null references users(addid),
+    evt_id int not null references events(id),
+    user_id int not null references users(id),
     status VARCHAR(255) not null,
     comments VARCHAR(255),
     primary key(id)

@@ -1,10 +1,17 @@
-var db = require('./db');
-var bookshelf = require('bookshelf')(db);
 
-var RegisterModel = bookshelf.Model.extend({
-    tableName: 'user_accounts'
+var bookshelf = require('./db');
+
+require('./EventAttendance');
+
+var Register = bookshelf.Model.extend({
+    tableName: 'users',
+    eventattendances: function() {
+        return this.hasMany('EventAttendance')
+    }
+
 });
 
-module.exports = RegisterModel;
+
+module.exports = bookshelf.model('Register', Register);
 
 
