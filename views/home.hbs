@@ -37,9 +37,12 @@
 <div class="homebuttonbox">
     <div class="row">
 
+
+
         <div class="twelve columns">
 
             {{#each events}}
+
                 <b>Event Name:</b> {{this.event_name}}<br>
                 <b>Start Date:</b> {{this.start_date}}<br>
                 <b>End Date:</b> {{this.end_date}}<br>
@@ -51,8 +54,8 @@
                 <form action="/createeventattendance" method="post">
                     <input type="hidden" name="evt_id" value="{{this.id}}">
                     <input type="hidden" name="user_id" value="">
-                    <input type="hidden" name="status" value="yes--You're going to {{this.event_name}}">
-                    <input type="hidden" name="comments" value="comment!!">
+                    <input type="hidden" name="status" value="Attending - You are going to {{this.event_name}}">
+                    <input id="commentbox" type="text" name="comments" placeholder="Comments Here (eg. Can't Wait)" value=""><br><br>
 
                     <button>Attend</button>
                 </form>

@@ -24,7 +24,9 @@ create table events (
 create table event_attendance (
     id int not null auto_increment,
     evt_id int not null references events(id),
+--    evt_name not null references events(event_name),
     user_id int not null references users(id),
+--    user_name not null references users(name),
     status VARCHAR(255) not null,
     comments VARCHAR(255),
     primary key(id)

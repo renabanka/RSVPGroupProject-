@@ -146,7 +146,8 @@ function insertIntoEventsAttendance(req, res, next) {
 
 
     var eventattendance = new EventAttendance(eventAttendence).save().then(function(data) {
-        res.redirect('/home');
+        res.redirect('eventattendance');
+
     });
 }
 
@@ -195,18 +196,19 @@ function attemptToLogin(req, res, next) {
     var password = req.body.password_hash;
     console.log(password, req.body)
     RegisterModel.where({email: req.body.email}).fetch().then(
-        function (result) {
-            var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
-            req.session.theResultsFromOurModelInsertion = result.attributes.email;
-            req.session.user_id = result.attributes.id;
-            if (attempt === true) {
-                res.redirect('/home');
-            }
-            else {
-                res.render('loginfail')
-            }
-            // res.json({'is_logged_in': attempt});
-        });
+
+      function (result) {
+        var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
+        req.session.theResultsFromOurModelInsertion = result.attributes.email;
+          req.session.user_id = result.attributes.id;
+          if (attempt === true) {
+              res.redirect('/home');
+          }
+          else {
+              res.render('loginfail')
+          }
+          // res.json({'is_logged_in': attempt});
+      });
 
 }
 
