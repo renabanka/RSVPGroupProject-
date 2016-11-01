@@ -52,7 +52,7 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 //Event created and entered in events table
 router.post('/createevent', insertIntoEventsTable);
 
-
+router.post('/createeventattendance', insertIntoEventsAttendance);
 
 
 // router.patch('', function (req, res) {
@@ -86,7 +86,8 @@ function renderAll(req, res, next) {
         var sanitizeModels = sanitizeModelsToJsonArray(models);
         var resJson = {
             events: sanitizeModels,
-            name: req.session.theResultsFromOurModelInsertion
+            name: req.session.theResultsFromOurModelInsertion,
+            id: req.session.user_id,
         };
 
         res.render('home', resJson);
@@ -136,6 +137,18 @@ function insertIntoUserAccountsTable(req, res, next) {
   });
 }
 
+//function insertIntoEventsAttendance: inputs user status into eventsAttendance
+function insertIntoEventsAttendance(req, res, next) {
+    console.log(req.body);
+    console.log(req.session)
+    var eventAttendence = req.body;
+    eventAttendence.user_id = req.session.user_id;
+
+
+    var eventattendance = new EventAttendance(eventAttendence).save().then(function(data) {
+        res.redirect('eventattendance');
+    });
+}
 
 
 
@@ -151,6 +164,7 @@ function attemptToRegister(req, res, next) {
         password_hash: hashedPassword
     }).save().then(function(result) {
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
+        req.session.user_id = result.attributes.id;
         console.log(result.attributes.email);
         res.redirect('/home')
     })
@@ -184,7 +198,7 @@ function attemptToLogin(req, res, next) {
       function (result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
-          req.session.user_id = result.attributes.id
+          req.session.user_id = result.attributes.id;
           if (attempt === true) {
               res.redirect('/home');
           }

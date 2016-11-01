@@ -144,3 +144,8 @@ header nav a {
     width: 70%;
 
 }
+
+#commentbox {
+    width: 50%;
+    height: 100px;
+}

@@ -173,13 +173,13 @@ input[type="button"] {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
-  color: white;
+  color: black;
   text-align: center;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 13px;
+  /*font-weight: 600;*/
   line-height: 38px;
   letter-spacing: .1rem;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   text-decoration: none;
   white-space: nowrap;
   background-color: transparent;
@@ -270,6 +270,7 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus,
+input[type="button"]:focus,
 textarea:focus,
 select:focus {
   border: 1px solid #33C3F0;
