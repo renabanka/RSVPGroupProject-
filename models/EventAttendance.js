@@ -1,14 +1,14 @@
-var Bookshelf = require('./db');
 
-require('./Register')
+var bookshelf = require('./db');
 
+require('./Register');
 
-var EventModel = Bookshelf.Model.extend({
-    tableName: 'events',
-    event_attendance: function(){
-        return this.belongsTo('User')
-}
-
+var EventAttendance = bookshelf.Model.extend({
+    tableName: 'event_attendance',
+    user: function() {
+        return this.belongsTo('Register')
+    }
 });
 
-module.exports = Bookshelf.model('EventModel', EventModel);
+module.exports = bookshelf.model('EventAttendance', EventAttendance);
+

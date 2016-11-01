@@ -1,25 +1,27 @@
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">RSVP</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/home">Home</a></li>
+<body class="homebody">
+<header>
+    <nav>
 
-        </ul>
 
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="/logout">Logout</a></li>
-            <li><a href="/home">Home</a></li>
+        <a href="/home">Home</a>
+        <a href="/logout">Logout</a>
 
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
+    </nav>
+</header>
 
-<div>
+<div class="createeventbox">
+    <div class="row">
+
     <h1>Congrats! You created the following event:</h1>
     Event Name: {{event_name}} <br><br>
     The event is on {{start_date}} and ends on {{end_date}}. <br><br>
     The event will start at {{start_time}} and end at {{end_time}} <br><br>
     Event Description: {{description}} <br><br>
     Event Location: {{location}} <br><br>
- </div>
+
+
+    </div>
+</div>
+
+</body>
+

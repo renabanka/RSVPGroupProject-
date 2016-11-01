@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var RegisterModel = require('../models/Register');
-var EventModel = require('../models/EventAttendance');
-var User = require('../models/Register');
+var EventModel = require('../models/Event');
+var EventAttendance = require('../models/EventAttendance');
 var bcrypt = require('bcryptjs');
 var patch = require('node-patch');
 
@@ -18,8 +18,8 @@ router.get('/register', renderRegister);
 router.get('/login', renderLogin);
 
 //Home Page
-router.get('/home', renderHome);
-router.get('/all', renderAll);
+router.get('/home', renderAll);
+router.get('/eventattendance', renderAllEventAttendance);
 
 router.get('/logout', function (req, res) {
   req.session = null;
@@ -35,13 +35,15 @@ router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });
 
-router.get('/EventAttendance', function(req, res, next) {
-    User.where({id:1}).fetch({withRelated: ['users_accounts']})
-        .then(function(user){
-            res.json(user.related('event_attendance'))
-        })
 
-})
+router.get('/eventattendance', function(req, res, next) {
+    RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
+        .then(function(user) {
+            res.json(user.related('eventattendances'))
+        })
+});
+
+
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
 
@@ -71,7 +73,20 @@ function renderAll(req, res, next) {
         var resJson = {
             events: sanitizeModels
         };
+        console.log(resJson)
         res.render('home', resJson);
+    });
+};
+
+
+function renderAllEventAttendance(req, res, next) {
+    EventAttendance.collection().fetch().then(function(models) {
+        var sanitizeModels = sanitizeModelsToJsonArray(models);
+        var resJson = {
+            event_attendance: sanitizeModels
+        };
+        console.log(resJson);
+        res.render('eventattendance', resJson);
     });
 };
 
