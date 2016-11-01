@@ -1,21 +1,19 @@
-<section>
-    <button><a href="/createevent">Create Event</button>
-    <button><a href="/home">My Events</button>
+{{#each events}}
 
-    welcome, {{name}}
+    <article>
+    {{this.event_name}}
+        Start Date: {{this.start_date}}
+    End Date: {{this.end_date}}
+    Start Time: {{this.start_time}}
+    End Time: {{this.end_time}}
+    Description: {{this.description}}
+    Location: {{this.location}}
 
-</section>
-
-<!--{{#each events}}-->
-
-
-<p>Event Name: {{this.event_name}}</p>
-<p>Start Date: {{this.start_date}}</p>
-<p>End Date: {{this.end_date}}</p>
-<p>Start Time: {{this.start_time}}</p>
-<p>End Time: {{this.end_time}}</p>
-<p>Description: {{this.description}}</p>
-<p>Location: {{this.location}}</p>
-
-
+        </article>
 {{/each}}
+
+
+<button><a href="/createevent">Create Event</button>
+<button><a href="/all">My Events</button>
+
+welcome, {{name}}
