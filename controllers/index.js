@@ -29,7 +29,7 @@ router.get('/logout', function (req, res) {
   ].join(''));
 });
 
-// router.get('/home', renderAll);
+
 router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });

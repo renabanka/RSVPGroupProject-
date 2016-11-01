@@ -1,11 +1,17 @@
-<div>
+<body class="signonbody">
 
-    <h1>Invalid username or password. Please try again.</h1>
+<div class="form">
+    <div class="row">
 
+
+    <h1>Invalid password. Please try again.</h1>
+
+    <div class="twelve columns">
     <form action="/login/verify" method="post">
         <input type="text" name="email" placeholder="email" required> <br><br>
         <input type="password" name="password_hash" placeholder="password" required><br><br>
-        <input type="submit" value="Sign In!"></input>
+        <input type="submit" value="Sign In!" class="coloredbutton"></input>
     </form>
+    </div>
 
 </div>
