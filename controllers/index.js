@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var RegisterModel = require('../models/Register');
 var EventModel = require('../models/Event');
+var EventAttendance = require('../models/EventAttendance');
 var bcrypt = require('bcryptjs');
 var patch = require('node-patch');
 
@@ -18,6 +19,7 @@ router.get('/login', renderLogin);
 
 //Home Page
 router.get('/home', renderAll);
+router.get('/eventattendance', renderAllEventAttendance);
 
 router.get('/logout', function (req, res) {
   req.session = null;
@@ -82,6 +84,18 @@ function renderAll(req, res, next) {
         };
         console.log(resJson)
         res.render('home', resJson);
+    });
+};
+
+
+function renderAllEventAttendance(req, res, next) {
+    EventAttendance.collection().fetch().then(function(models) {
+        var sanitizeModels = sanitizeModelsToJsonArray(models);
+        var resJson = {
+            event_attendance: sanitizeModels
+        };
+        console.log(resJson);
+        res.render('eventattendance', resJson);
     });
 };
 
