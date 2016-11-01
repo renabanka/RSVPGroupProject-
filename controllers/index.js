@@ -56,7 +56,7 @@ router.post('/createevent', insertIntoEventsTable);
 
 //Function for RenderHome: Creates session using email field
 function renderHome(req, res, next){
-
+    console.log(req.session, ' renderHome function')
   RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
       function(result) {
         console.log(result.attributes);
@@ -68,12 +68,18 @@ function renderHome(req, res, next){
 }
 
 function renderAll(req, res, next) {
+
+
+
+    console.log(req.session, ' renderalll function')
     EventModel.collection().fetch().then(function(models) {
+        console.log(models)
         var sanitizeModels = sanitizeModelsToJsonArray(models);
         var resJson = {
-            events: sanitizeModels
+            events: sanitizeModels,
+            name: req.session.theResultsFromOurModelInsertion
         };
-        console.log(resJson)
+
         res.render('home', resJson);
     });
 };
@@ -168,6 +174,7 @@ function attemptToLogin(req, res, next) {
       function (result) {
         var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
         req.session.theResultsFromOurModelInsertion = result.attributes.email;
+          req.session.user_id = result.attributes.id
           if (attempt === true) {
               res.redirect('/home');
           }
