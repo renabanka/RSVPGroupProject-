@@ -18,7 +18,6 @@ router.get('/login', renderLogin);
 
 //Home Page
 router.get('/home', renderAll);
-router.get('/all', renderAll);
 
 router.get('/logout', function (req, res) {
   req.session = null;
