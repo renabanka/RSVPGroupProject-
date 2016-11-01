@@ -17,7 +17,7 @@ router.get('/register', renderRegister);
 router.get('/login', renderLogin);
 
 //Home Page
-router.get('/home', renderHome);
+router.get('/home', renderAll);
 router.get('/all', renderAll);
 
 router.get('/logout', function (req, res) {
@@ -32,6 +32,13 @@ router.get('/logout', function (req, res) {
 
 router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
+});
+
+router.get('/eventattendance', function(req, res, next) {
+    RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
+        .then(function(user) {
+            res.json(user.related('eventattendances'))
+        })
 });
 
 
@@ -74,6 +81,7 @@ function renderAll(req, res, next) {
         var resJson = {
             events: sanitizeModels
         };
+        console.log(resJson)
         res.render('home', resJson);
     });
 };
