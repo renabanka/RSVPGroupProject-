@@ -45,27 +45,6 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 router.post('/createevent', insertIntoEventsTable);
 
 
-
-
-// router.patch('', function (req, res) {
-//     var updateObject = req.body; // {last_name : "smith", age: 44}
-//     var id = req.params.id;
-//     db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
-// });
-
-//Function for userUpdateEvent: User is updating fields in events table
-// function userUpdateEvent(req, res, next){
-//     // connection.query('UPDATE user SET ? WHERE ?', [{ Name: name }, { UserId: userId }]) <--ex.code
-//     EventModel.where({event_name: req.session.theResultsFromOurModelInsertion}).fetch().then(
-//         function(result) {
-//             console.log(result.attributes);
-//             res.render('home' , result.attributes);
-//         })
-//         .catch(function(error) {
-//             console.log(error)
-//         });
-}
-
 //Function for RenderHome: Creates session using email field
 function renderHome(req, res, next){
 
