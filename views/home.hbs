@@ -13,7 +13,7 @@
 <br>
 
 <div class="homebuttonbox">
-    <p>Welcome, {{name}}</p>
+    <p>Welcome, {{this.name}}</p>
     <div class="row">
 
         <div class="twelve columns">
@@ -44,7 +44,14 @@
         <p>End Time: {{this.end_time}}</p>
         <p>Description: {{this.description}}</p>
         <p>Location: {{this.location}}</p>
+
+    <form action="">
+        <input type="hidden" name="event_name" value="{{this.event_name}}">
+        <input type="hidden" name="event_id" value{{this.id}}>
+        <button>attend</button>
+    </form>
     ---------------------------------------------------
+
 
 {{/each}}
 </div>
