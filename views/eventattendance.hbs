@@ -38,9 +38,7 @@ hi {{name}}
 {{#each event_attendance}}
 
         <article>
-            {{this.evt_id}}
-            {{this.user_id}}
-            {{this.status}}
+            {{this.name}} is {{this.status}} {{this.event_name}}
             {{this.comments}}
 
         </article>

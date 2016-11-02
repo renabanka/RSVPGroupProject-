@@ -25,7 +25,7 @@ router.get('/home', renderAll);
 //Event Attendance Page
 router.get('/eventattendance', renderAllEventAttendance);
 
-router.get('/myeventattendance', renderMyEventAttendance);
+router.get('/myeventattendance2', renderMyEventAttendance);
 
 
 //Create Event page
@@ -39,8 +39,8 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 
-router.get('/myeventattendance2', function (req, res) {
-    res.render('myeventattendance')
+router.get('/myeventattendance', function (req, res) {
+    res.render('myeventattendance2')
 });
 
 
@@ -82,7 +82,7 @@ function renderAll(req, res, next) {
             events: sanitizeModels,
             name: req.session.name,
             email: req.session.email,
-            id: req.session.user_id,
+            id: req.session.user_id
         };
 
         res.render('home', resJson);
@@ -142,6 +142,7 @@ function insertIntoEventsAttendance(req, res, next) {
     console.log(req.session);
     var eventAttendence = req.body;
     eventAttendence.user_id = req.session.user_id;
+    eventAttendence.name = req.session.name;
 
     var attendance = new EventAttendance(eventAttendence).save().then(function(data) {
         res.redirect('eventattendance');
@@ -226,12 +227,14 @@ function renderMyEventAttendance(req, res, next) {
     RegisterModel.where({id: req.session.user_id}).fetch({withRelated: ['eventattendances']})
         .then(function(user) {
             console.log(user, 'HERE!!');
-            EventModel.where({id: user.related('eventattendances').models[0].attributes.evt_id}).fetch()
+
+    EventModel.where({id: user.related('eventattendances').models[0].attributes.evt_id}).fetch()
                 .then(function(event){
-                    console.log(event)
+                    console.log(event);
                     res.json(user.related('eventattendances'))
                 })
         })
+
 };
 
 

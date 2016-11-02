@@ -21,7 +21,7 @@
             <FORM>
                 <input type="button" Value="Create Event" Onclick="window.location.href='/createevent'">
                 <input type="button" Value="Event Attendance" Onclick="window.location.href='/eventattendance'">
-                <a href="/myeventattendance">My Event Attendance</a>
+                <button><a href="/myeventattendance">My Event Attendance</a></button>
 
             </FORM>
 
@@ -55,10 +55,13 @@
     <form action="/createeventattendance" method="post">
         <input type="hidden" name="evt_id" value="{{this.id}}">
         <input type="hidden" name="user_id" value="">
-        <input type="hidden" name="status" value="Attending - You are going to {{this.event_name}}">
+        <input type="hidden" name="status" value="attending">
         <input id="commentbox" type="text" name="comments" placeholder="Comments Here (eg. Can't Wait)" value=""><br><br>
+        <input type="hidden" name="event_name" value="{{this.event_name}}">
+        <input type="hidden" name="name" value="">
 
         <button>Attend</button>
+
     </form>
 
 
