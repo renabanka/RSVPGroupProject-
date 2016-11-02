@@ -1,10 +1,18 @@
 <body class="signonbody">
 
-<div class="form">
-    <div class="row">
 
-    <h1>Welcome to RSVP!</h1>
-    <p>Sorry that email address is already registered.</p>
+<div class="registertext">
+
+<h1>Welcome to RSVP</h1>
+
+
+</div>
+
+<div class="registerform">
+    <div class="row">
+        <p>Sorry that email address is already registered.</p>
+
+
 
         <div class="twelve columns">
 
@@ -13,11 +21,12 @@
                 <input type="text" name="email" placeholder="email" required> <br><br>
                 <input type="password" name="password_hash" placeholder="password" required><br><br>
                 <input type="submit" value="Sign Up!" class="coloredbutton"></input>
-                <button class="coloredbutton"><a href="/login" class="homelinks">Returning User</button><br><br>
+                <input type="button" Value="Returning User" Onclick="window.location.href='/login'">
+
             </form>
 
         </div>
 
     </div>
 
-</div>
+

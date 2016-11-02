@@ -145,7 +145,7 @@ function insertIntoEventsAttendance(req, res, next) {
     eventAttendence.name = req.session.name;
 
     var attendance = new EventAttendance(eventAttendence).save().then(function(data) {
-        res.redirect('eventattendance');
+        res.redirect('home');
     });
 }
 

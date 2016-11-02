@@ -1,25 +1,34 @@
-<body class="homebody">
+<body class="signonbody">
+
 <header>
+    <h1 class="headername">RSVP</h1>
     <nav>
 
-
+        <a href="#">Welcome, {{name}}</a>
         <a href="/home">Home</a>
         <a href="/logout">Logout</a>
+
 
     </nav>
 </header>
 
-<div class="createeventbox">
+<br><br>
+
+<div class="homebuttonbox">
+
     <div class="row">
 
-    <h1>Congrats! You created the following event:</h1>
-    Event Name: {{event_name}} <br><br>
-    The event is on {{start_date}} and ends on {{end_date}}. <br><br>
-    The event will start at {{start_time}} and end at {{end_time}} <br><br>
-    Event Description: {{description}} <br><br>
-    Event Location: {{location}} <br><br>
+        <div class="twelve columns">
 
 
+            <FORM>
+                <input type="button" Value="Browse Events" Onclick="window.location.href='/home'">
+                <input type="button" Value="Create Event" Onclick="window.location.href='/createevent'">
+                <input type="button" Value="Event Attendance" Onclick="window.location.href='/eventattendance'">
+                <button class="coloredbutton"><a href="/myeventattendance">My Event Attendance</a></button>
+            </FORM>
+
+        </div>
     </div>
 </div>
 
