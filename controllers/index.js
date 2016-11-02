@@ -50,6 +50,7 @@ router.get('/myeventattendance', function(req, res, next) {
             EventModel.where({id: user.related('eventattendances').models[2].attributes.evt_id}).fetch()
                 .then(function(event){
                     console.log(event)
+                    
                     res.json(user.related('eventattendances'))
                 })
 
