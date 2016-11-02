@@ -18,10 +18,11 @@
 
         <div class="twelve columns">
 
-            <FORM>
-                <input type="button" Value="Create Event" Onclick="window.location.href='/createevent'">
-                <input type="button" Value="Event Attendance" Onclick="window.location.href='/eventattendance'">
-
+        <FORM>
+            <input type="button" Value="Create Event" Onclick="window.location.href='/createevent'">
+            <input type="button" Value="Event Attendance" Onclick="window.location.href='/eventattendance'">
+            <a href="/myeventattendance">My Event Attendance</a>
+            <input type="button" Value="My Event Attendance" Onclick="href"='/myeventattendance">
             </FORM>
 
         </div>
@@ -39,30 +40,30 @@
 
 
 
-        <div class="twelve columns">
+<div class="twelve columns">
 
-            {{#each events}}
+{{#each events}}
 
-                <b>Event Name:</b> {{this.event_name}}<br>
-                <b>Start Date:</b> {{this.start_date}}<br>
-                <b>End Date:</b> {{this.end_date}}<br>
-                <b>Start Time:</b> {{this.start_time}}<br>
-                <b>End Time:</b> {{this.end_time}}<br>
-                <b>Description:</b> {{this.description}}<br>
-                <b>Location:</b> {{this.location}}<br><br>
+        <b>Event Name:</b> {{this.event_name}}<br>
+        <b>Start Date:</b> {{this.start_date}}<br>
+        <b>End Date:</b> {{this.end_date}}<br>
+        <b>Start Time:</b> {{this.start_time}}<br>
+        <b>End Time:</b> {{this.end_time}}<br>
+        <b>Description:</b> {{this.description}}<br>
+        <b>Location:</b> {{this.location}}<br><br>
 
-                <form action="/createeventattendance" method="post">
-                    <input type="hidden" name="evt_id" value="{{this.id}}">
-                    <input type="hidden" name="user_id" value="">
-                    <input type="hidden" name="status" value="Attending - You are going to {{this.event_name}}">
-                    <input id="commentbox" type="text" name="comments" placeholder="Comments Here (eg. Can't Wait)" value=""><br><br>
+    <form action="/createeventattendance" method="post">
+        <input type="hidden" name="evt_id" value="{{this.id}}">
+        <input type="hidden" name="user_id" value="">
+        <input type="hidden" name="status" value="Attending - You are going to {{this.event_name}}">
+        <input id="commentbox" type="text" name="comments" placeholder="Comments Here (eg. Can't Wait)" value=""><br><br>
 
-                    <button>Attend</button>
-                </form>
+            <button>Attend</button>
+        </form>
 
 
 
-            {{/each}}
+        {{/each}}
         </div>
     </div>
 </div>

@@ -35,13 +35,27 @@ router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });
 
-router.get('/eventattendance', function(req, res, next) {
-    RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
+// router.get('/eventattendance', function(req, res, next) {
+//     RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
+//         .then(function(user) {
+//             res.json(user.related('eventattendances'))
+//         })
+// });
+
+router.get('/myeventattendance', function(req, res, next) {
+    console.log(req.session);
+    RegisterModel.where({id: req.session.user_id}).fetch({withRelated: ['eventattendances']})
         .then(function(user) {
-            res.json(user.related('eventattendances'))
+            console.log(user, 'HERE!!');
+            EventModel.where({id: user.related('eventattendances').models[2].attributes.evt_id}).fetch()
+                .then(function(event){
+                    console.log(event)
+                    res.json(user.related('eventattendances'))
+                })
+
+
         })
 });
-
 
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
@@ -53,13 +67,6 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 router.post('/createevent', insertIntoEventsTable);
 
 router.post('/createeventattendance', insertIntoEventsAttendance);
-
-
-// router.patch('', function (req, res) {
-//     var updateObject = req.body; // {last_name : "smith", age: 44}
-//     var id = req.params.id;
-//     db.users.update({_id  : ObjectId(id)}, {$set: updateObject});
-// });
 
 
 
