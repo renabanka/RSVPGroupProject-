@@ -1,7 +1,12 @@
 var bookshelf = require('./db');
 
+require('./EventAttendance');
+
 var EventModel = bookshelf.Model.extend({
-    tableName: 'events'
+    tableName: 'events',
+    eventattendances: function() {
+    return this.hasMany('EventAttendance')
+    }
 });
 
-module.exports = EventModel;
+module.exports = bookshelf.model('EventModel', EventModel);

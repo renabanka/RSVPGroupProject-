@@ -12,6 +12,9 @@
 <br><br><br>
 <br>
 
+
+hi {{name}}
+
 <div class="homebuttonbox">
     <div class="row">
         <div class="twelve columns">
@@ -36,9 +39,7 @@
 {{#each event_attendance}}
 
         <article>
-            {{this.evt_id}}
-            {{this.user_id}}
-            {{this.status}}
+            {{this.name}} is {{this.status}} {{this.event_name}}
             {{this.comments}}
 
         </article>
@@ -47,4 +48,5 @@
 </div>
 </div>
 </div>
+
 

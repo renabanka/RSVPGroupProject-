@@ -149,3 +149,76 @@ header nav a {
     width: 50%;
     height: 100px;
 }
+
+.btn-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+
+}
+.btn-upload input[type=file] {
+    position: absolute;
+    opacity: 0;
+    z-index: 0;
+    display: block;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+}
+.btn-upload .btn{
+    padding: 8px 20px;
+    background: white;
+    border: 1px solid #EFEFEE;
+    color: #EFEFEE;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+}
+.btn-upload:hover .btn{
+    padding: 8px 20px;
+    background: white;
+    color: #888888;
+    border: 1px solid #888888;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+}
+
+
+
+.btn-uploadevent {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+
+}
+.btn-uploadevent input[type=file] {
+    position: absolute;
+    opacity: 0;
+    z-index: 0;
+    display: block;
+    width: 300px;
+    height: 200px;
+}
+.btn-uploadevent .btn{
+    padding: 8px 20px;
+    background: white;
+    border: 1px solid #EFEFEE;
+    color: #EFEFEE;
+    width: 300px;
+    height: 200px;
+}
+.btn-uploadevent:hover .btn{
+    padding: 8px 20px;
+    background: white;
+    color: #888888;
+    border: 1px solid #888888;
+    width: 300px;
+    height: 200px;
+}
+

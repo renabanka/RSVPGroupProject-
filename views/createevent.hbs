@@ -14,6 +14,10 @@
 
 
     <form action="/createevent" method="post">
+        <label class="btn-uploadevent">
+            <input type="file" name="fileupload" >
+            <button class="btn">Picture</button>
+        </label><br><br>
         Event Name: <input type="text" name="event_name" placeholder="Event Name" required><br><br>
         Start Date: <input type="date" name="start_date" placeholder="Event Start Date" required><br><br>
         End Date: <input type="date" name="end_date" placeholder="Event End Date" required><br><br>

@@ -29,5 +29,7 @@ create table event_attendance (
 --    user_name not null references users(name),
     status VARCHAR(255) not null,
     comments VARCHAR(255),
+    event_name VARCHAR(255),
+    name VARCHAR(255),
     primary key(id)
 );

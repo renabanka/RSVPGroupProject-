@@ -6,21 +6,26 @@ var EventAttendance = require('../models/EventAttendance');
 var bcrypt = require('bcryptjs');
 var patch = require('node-patch');
 
+//ALL GET ROUTES
 
 //Initial Page
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'RSVP' });
 });
+
 //Register Page
 router.get('/register', renderRegister);
 
-//Login Page for Returning Users
+//Login Page
 router.get('/login', renderLogin);
 
 //Home Page
 router.get('/home', renderAll);
+
+//Event Attendance Page
 router.get('/eventattendance', renderAllEventAttendance);
 
+<<<<<<< HEAD
 router.get('/logout', function (req, res) {
     req.session = null;
     res.send([
@@ -29,12 +34,17 @@ router.get('/logout', function (req, res) {
         res.redirect('/')
     ].join(''));
 });
+=======
+router.get('/myeventattendance2', renderMyEventAttendance);
+>>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 
 
+//Create Event page
 router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });
 
+<<<<<<< HEAD
 // router.get('/eventattendance', function(req, res, next) {
 //     RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
 //         .then(function(user) {
@@ -58,6 +68,22 @@ router.get('/myeventattendance', function(req, res, next) {
         })
 });
 
+=======
+//Logout
+router.get('/logout', function (req, res) {
+    req.session = null;
+    res.redirect('/');
+});
+
+router.get('/myeventattendance', function (req, res) {
+    res.render('myeventattendance2')
+});
+
+
+
+//ALL Post Routes
+
+>>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
 
@@ -67,12 +93,17 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 //Event created and entered in events table
 router.post('/createevent', insertIntoEventsTable);
 
+
+<<<<<<< HEAD
+=======
 router.post('/createeventattendance', insertIntoEventsAttendance);
 
+>>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 
 
 //Function for RenderHome: Creates session using email field
 function renderHome(req, res, next){
+<<<<<<< HEAD
     console.log(req.session, ' renderHome function')
     RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
         function(result) {
@@ -82,20 +113,28 @@ function renderHome(req, res, next){
         .catch(function(error) {
             console.log(error)
         });
+=======
+    console.log(req.session, 'renderHome function')
+  RegisterModel.where({email: req.session.email}).fetch().then(
+      function(result) {
+    console.log(result.attributes);
+        res.render('home' , result.attributes);
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+>>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 }
 
 function renderAll(req, res, next) {
-
-
-
-    console.log(req.session, ' renderalll function')
+    console.log(req.session);
     EventModel.collection().fetch().then(function(models) {
-        console.log(models)
         var sanitizeModels = sanitizeModelsToJsonArray(models);
         var resJson = {
             events: sanitizeModels,
-            name: req.session.theResultsFromOurModelInsertion,
-            id: req.session.user_id,
+            name: req.session.name,
+            email: req.session.email,
+            id: req.session.user_id
         };
 
         res.render('home', resJson);
@@ -107,7 +146,11 @@ function renderAllEventAttendance(req, res, next) {
     EventAttendance.collection().fetch().then(function(models) {
         var sanitizeModels = sanitizeModelsToJsonArray(models);
         var resJson = {
-            event_attendance: sanitizeModels
+            event_attendance: sanitizeModels,
+            email: req.session.email,
+            id: req.session.user_id,
+            name: req.session.name,
+
         };
         console.log(resJson);
         res.render('eventattendance', resJson);
@@ -148,12 +191,12 @@ function insertIntoEventsTable(req, res, next) {
 //function insertIntoEventsAttendance: inputs user status into eventsAttendance
 function insertIntoEventsAttendance(req, res, next) {
     console.log(req.body);
-    console.log(req.session)
+    console.log(req.session);
     var eventAttendence = req.body;
     eventAttendence.user_id = req.session.user_id;
+    eventAttendence.name = req.session.name;
 
-
-    var eventattendance = new EventAttendance(eventAttendence).save().then(function(data) {
+    var attendance = new EventAttendance(eventAttendence).save().then(function(data) {
         res.redirect('eventattendance');
 
     });
@@ -172,7 +215,8 @@ function attemptToRegister(req, res, next) {
         email: req.body.email,
         password_hash: hashedPassword
     }).save().then(function(result) {
-        req.session.theResultsFromOurModelInsertion = result.attributes.email;
+        req.session.name = result.attributes.name;
+        req.session.email = result.attributes.email;
         req.session.user_id = result.attributes.id;
         console.log(result.attributes.email);
         res.redirect('/home')
@@ -201,13 +245,19 @@ function comparePasswordHashes (input, db) {
 
 //Function attemptToLogin: Confirms compared passwords and returns results
 function attemptToLogin(req, res, next) {
+<<<<<<< HEAD
     var password = req.body.password_hash;
     console.log(password, req.body)
+=======
+  var password = req.body.password_hash;
+    console.log(password, req.body);
+>>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
     RegisterModel.where({email: req.body.email}).fetch().then(
 
       function (result) {
-        var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
-        req.session.theResultsFromOurModelInsertion = result.attributes.email;
+          var attempt = comparePasswordHashes(req.body.password_hash, result.attributes.password_hash);
+          req.session.name = result.attributes.name;
+          req.session.email = result.attributes.email;
           req.session.user_id = result.attributes.id;
           if (attempt === true) {
               res.redirect('/home');
@@ -215,7 +265,6 @@ function attemptToLogin(req, res, next) {
           else {
               res.render('loginfail')
           }
-          // res.json({'is_logged_in': attempt});
       });
 
 }
@@ -230,6 +279,21 @@ function sanitizeModelsToJsonArray(dbModels) {
         ret.push(attrs);
     }
     return ret;
+};
+
+function renderMyEventAttendance(req, res, next) {
+    console.log(req.session);
+    RegisterModel.where({id: req.session.user_id}).fetch({withRelated: ['eventattendances']})
+        .then(function(user) {
+            console.log(user, 'HERE!!');
+
+    EventModel.where({id: user.related('eventattendances').models[0].attributes.evt_id}).fetch()
+                .then(function(event){
+                    console.log(event);
+                    res.json(user.related('eventattendances'))
+                })
+        })
+
 };
 
 
