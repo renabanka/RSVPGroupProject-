@@ -25,18 +25,9 @@ router.get('/home', renderAll);
 //Event Attendance Page
 router.get('/eventattendance', renderAllEventAttendance);
 
-<<<<<<< HEAD
-router.get('/logout', function (req, res) {
-    req.session = null;
-    res.send([
-        'You are now logged out.',
-        '&lt;br/>',
-        res.redirect('/')
-    ].join(''));
-});
-=======
+
 router.get('/myeventattendance2', renderMyEventAttendance);
->>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
+
 
 
 //Create Event page
@@ -44,31 +35,6 @@ router.get('/createevent', function(req, res, next) {
     res.render('createevent', {});
 });
 
-<<<<<<< HEAD
-// router.get('/eventattendance', function(req, res, next) {
-//     RegisterModel.where({id:1}).fetch({withRelated: ['eventattendances']})
-//         .then(function(user) {
-//             res.json(user.related('eventattendances'))
-//         })
-// });
-
-router.get('/myeventattendance', function(req, res, next) {
-    console.log(req.session);
-    RegisterModel.where({id: req.session.user_id}).fetch({withRelated: ['eventattendances']})
-        .then(function(user) {
-            console.log(user, 'HERE!!');
-            EventModel.where({id: user.related('eventattendances').models[2].attributes.evt_id}).fetch()
-                .then(function(event){
-                    console.log(event)
-                    
-                    res.json(user.related('eventattendances'))
-                })
-
-
-        })
-});
-
-=======
 //Logout
 router.get('/logout', function (req, res) {
     req.session = null;
@@ -83,7 +49,6 @@ router.get('/myeventattendance', function (req, res) {
 
 //ALL Post Routes
 
->>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 //Successful/Unsuccessful Login Page
 router.post('/login/verify', attemptToLogin);
 
@@ -94,26 +59,14 @@ router.post('/register/verify', attemptToRegister, insertIntoUserAccountsTable);
 router.post('/createevent', insertIntoEventsTable);
 
 
-<<<<<<< HEAD
-=======
+
 router.post('/createeventattendance', insertIntoEventsAttendance);
 
->>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 
 
 //Function for RenderHome: Creates session using email field
 function renderHome(req, res, next){
-<<<<<<< HEAD
-    console.log(req.session, ' renderHome function')
-    RegisterModel.where({email: req.session.theResultsFromOurModelInsertion}).fetch().then(
-        function(result) {
-            console.log(result.attributes);
-            res.render('home' , result.attributes);
-        })
-        .catch(function(error) {
-            console.log(error)
-        });
-=======
+
     console.log(req.session, 'renderHome function')
   RegisterModel.where({email: req.session.email}).fetch().then(
       function(result) {
@@ -123,7 +76,6 @@ function renderHome(req, res, next){
       .catch(function(error) {
         console.log(error)
       });
->>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
 }
 
 function renderAll(req, res, next) {
@@ -245,13 +197,9 @@ function comparePasswordHashes (input, db) {
 
 //Function attemptToLogin: Confirms compared passwords and returns results
 function attemptToLogin(req, res, next) {
-<<<<<<< HEAD
-    var password = req.body.password_hash;
-    console.log(password, req.body)
-=======
+
   var password = req.body.password_hash;
     console.log(password, req.body);
->>>>>>> e134c26b8a638e2b47995ee4d6dcf3b5ec66c048
     RegisterModel.where({email: req.body.email}).fetch().then(
 
       function (result) {

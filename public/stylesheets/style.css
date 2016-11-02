@@ -1,3 +1,7 @@
+#event-attendance-greeeting {
+ background-color: white;
+}
+
 .homebody {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -7,7 +11,10 @@
 }
 
 .signonbody {
- background: #F9F9F9;
+    background: #5C258D; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #5C258D , #4389A2); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #5C258D , #4389A2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .form {
@@ -56,7 +63,7 @@ h1 {
   font-family: 'Pacifico', cursive;
   font-size: 75px;
   text-align:center;
-  margin-top: 100px;
+  margin-top: 5px;
 }
 
 .registerbutton {
@@ -100,7 +107,7 @@ ul {
 header { color: #333333; line-height: 108px; }
 
 
-header nav {
+header{
     font-size: 18px; float: right;
     margin-right: 5%;
 }
@@ -110,6 +117,8 @@ header nav a {
     text-decoration: none;
 }
 
+
+
 .homebuttonbox {
     display: inline-block;
     /*text-align: center;*/
@@ -118,11 +127,11 @@ header nav a {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 100px;
+    margin-top: 30px;
     border-color: #EFEFEE;
     border-style: solid;
     border-width: 2px;
-    width: 70%;
+    width: 60%;
 
 }
 
@@ -221,4 +230,6 @@ header nav a {
     width: 300px;
     height: 200px;
 }
+
+
 
