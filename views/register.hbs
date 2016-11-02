@@ -3,17 +3,20 @@
 <div class="form">
     <div class="row">
 
-
-<h1>Welcome to RSVP</h1>
+    <h1>Welcome to RSVP</h1>
 
         <div class="twelve columns">
-<form action="/register/verify" method="post">
 
-    <input type="text" name="name" placeholder="Name" required> <br><br>
-    <input type="text" name="email" placeholder="Email" required> <br><br>
-    <input type="password" name="password_hash" placeholder="Password" required><br><br>
-    <input type="submit" value="Sign Up!" class="coloredbutton"></input>
-</form>
+            <form action="/register/verify" method="post">
+                <label class="btn-upload">
+                    <input type="file" name="fileupload" >
+                    <button class="btn">Picture</button>
+                </label><br><br>
+                <input type="text" name="name" placeholder="Name" required> <br><br>
+                <input type="text" name="email" placeholder="Email" required> <br><br>
+                <input type="password" name="password_hash" placeholder="Password" required><br><br>
+                <input type="submit" value="Sign Up!" class="coloredbutton"></input>
+            </form>
 
         </div>
     </div>
