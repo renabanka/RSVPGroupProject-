@@ -4,6 +4,7 @@
     <h1 class="headername">RSVP</h1>
 <nav>
 
+
     <a href="#">Welcome, {{name}}</a>
     <a href="/home">Home</a>
     <a href="/logout">Logout</a>
@@ -14,9 +15,10 @@
 <br><br>
 
 <div class="homebuttonbox">
+    <br>
 
             <FORM>
-                <input type="button" Value="Browse Events" Onclick="window.location.href='/home'">
+                <input type="button" class="buttonimage" Value="Browse Events" Onclick="window.location.href='/home'">
                 <input type="button" Value="Create Event" Onclick="window.location.href='/createevent'">
                 <input type="button" Value="Event Attendance" Onclick="window.location.href='/eventattendance'">
                 <input type="button" Value="My Event Attendance" Onclick="window.location.href='/myeventattendance'">
@@ -33,7 +35,12 @@
 
 
 {{#each events}}
+    <div class="attendees">
+        <!--<h6><b>Attendees:</b></h6>-->
+        <div id='message-container1'></div>
 
+    </div>
+        <img src='{{this.image}}' height="200" width="450"><br>
         <b>Event Name:</b> {{this.event_name}}<br>
         <b>Start Date:</b> {{this.start_date}}<br>
         <b>End Date:</b> {{this.end_date}}<br>
@@ -51,9 +58,12 @@
         <input id="commentbox" type="text" name="comments" placeholder="Comments Here (eg. Can't Wait)" value=""><br><br>
         <input type="hidden" name="event_name" value="{{this.event_name}}">
         <input type="hidden" name="name" value="">
-        <!--<button class="coloredbutton">Attend</button>-->
+        <input type="hidden" name="start_time" value="{{this.start_time}}">
+        <input type="hidden" name="end_time" value="{{this.end_time}}">
+        <input type="hidden" name="start_date" value="{{this.start_date}}">
+        <input type="hidden" name="end_date" id="{{this.end_date}}">
         <input type="submit" value="Attend"></input>
-        <div id='message-container1'></div>
+
     </form>
 
 
@@ -61,7 +71,11 @@
 
 
 
-    {{/each}}
+
+
+
+{{/each}}
+
 
 
 </body>

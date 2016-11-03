@@ -4,7 +4,7 @@
     <h1 class="headername">RSVP</h1>
     <nav>
 
-        <a href="#">Welcome, {{name}}</a>
+
         <a href="/home">Home</a>
         <a href="/logout">Logout</a>
 
@@ -19,7 +19,7 @@
     <div class="row">
 
         <div class="twelve columns">
-
+            <br>
 
             <FORM>
                 <input type="button" Value="Browse Events" Onclick="window.location.href='/home'">
@@ -39,11 +39,11 @@
     <div class="row">
 
 
+        <!--<img src="" height="200" alt="Image preview...">-->
     <form action="/createevent" method="post">
-        <label class="btn-uploadevent">
-            <input type="file" name="fileupload" >
-            <button class="btn">Picture</button>
-        </label><br><br>
+        <!--<input type="file" onchange="previewFile()"><br><br>-->
+        Event Photo:<input id="file" type="file"/>
+        <input type="hidden" name="image" value=""><br><br>
         Event Name: <input type="text" name="event_name" placeholder="Event Name" required><br><br>
         Start Date: <input type="date" name="start_date" placeholder="Event Start Date" required><br><br>
         End Date: <input type="date" name="end_date" placeholder="Event End Date" required><br><br>
@@ -56,5 +56,41 @@
 </div>
 
 </div>
+
+
+<script>
+    function getBase64(file) {
+        var reader = new FileReader();
+        console.log(file);
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            console.log(reader.result);
+         hiddenFile[0].value = reader.result;
+            console.log(hiddenFile[0].value)
+
+
+            return(reader.result);
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
+
+
+    var file = $('input[type="file"]')
+    var hiddenFile = $('input[type="hidden"]');
+
+    file.on('change', function(){
+        console.log('this is clicking')
+       var fileConvert = file[0].files[0]
+        console.log(fileConvert)
+        getBase64(fileConvert)
+    });
+
+</script>
+
+
+
+
 
 </body>

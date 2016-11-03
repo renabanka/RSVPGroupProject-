@@ -280,8 +280,34 @@ header nav a {
     height: 200px;
 }
 
-.coloredbutton {
-    background-color: #48739d;
-    border-color: white;
+.buttonimage {
+    background:url('public/images/search.png') no-repeat left center;
+
+}
+
+
+.btn span.icon {
+    background: url("/public/images/search.png") no-repeat;
+    float: left;
+    width: 10px;
+    height: 40px;
+}
+
+.attendees {
+    float: right;
+    /*border-color: #EFEFEE;*/
+    /*border-style: solid;*/
+    /*border-width: 2px;*/
+    display: inline-block;
+    background: rgba(255,255,255,.9);
+    /*padding: 50px;*/
+    position: absolute;
+    left: 70%;
+    transform: translateX(-50%);
+    width: 20%;
+}
+
+.photo {
+    background:
 
 }

@@ -11,6 +11,7 @@ create table users (
 
 create table events (
     id int not null auto_increment,
+    image LONGTEXT,
     event_name varchar(255) not null,
     start_date DATE not null,
     end_date DATE not null,
@@ -21,6 +22,8 @@ create table events (
     primary key (id)
 );
 
+
+
 create table event_attendance (
     id int not null auto_increment,
     evt_id int not null references events(id),
@@ -30,6 +33,11 @@ create table event_attendance (
     status VARCHAR(255) not null,
     comments VARCHAR(255),
     event_name VARCHAR(255),
+    start_time TIME,
+    end_time TIME,
+    start_date text,
+    end_date text,
+
     name VARCHAR(255),
     primary key(id)
 );
