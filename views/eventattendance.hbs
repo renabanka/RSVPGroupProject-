@@ -42,8 +42,8 @@
 {{#each event_attendance}}
 
         <article>
-            {{this.name}} is {{this.status}} {{this.event_name}}
-            {{this.comments}}
+            <b>{{this.name}}</b> has RSVP'd to <b>{{this.event_name}}</b>
+            (They left this comment: {{this.comments}})
 
         </article>
 {{/each}}

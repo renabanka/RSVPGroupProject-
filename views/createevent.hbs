@@ -39,10 +39,11 @@
     <div class="row">
 
 
-        <!--<img src="" height="200" alt="Image preview...">-->
+
     <form action="/createevent" method="post">
-        <!--<input type="file" onchange="previewFile()"><br><br>-->
-        Event Photo:<input id="file" type="file"/>
+
+        Event Photo:<br>
+        <input id="file" type="file"/>
         <input type="hidden" name="image" value=""><br><br>
         Event Name: <input type="text" name="event_name" placeholder="Event Name" required><br><br>
         Start Date: <input type="date" name="start_date" placeholder="Event Start Date" required><br><br>
@@ -77,15 +78,15 @@
     }
 
 
-    var file = $('input[type="file"]')
-    var hiddenFile = $('input[type="hidden"]');
+        var file = $('input[type="file"]')
+        var hiddenFile = $('input[type="hidden"]');
 
-    file.on('change', function(){
-        console.log('this is clicking')
-       var fileConvert = file[0].files[0]
-        console.log(fileConvert)
-        getBase64(fileConvert)
-    });
+        file.on('change', function () {
+            console.log('this is clicking')
+            var fileConvert = file[0].files[0]
+            console.log(fileConvert)
+            getBase64(fileConvert)
+        });
 
 </script>
 

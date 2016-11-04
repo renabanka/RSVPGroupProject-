@@ -8,6 +8,8 @@ $.ajax({
         for (i = 0; i < data.length; i++) {
             // Runs 5 times, with values of step 0 through 4.
 
+
+
             $('#message-container').append('Event: ' + data[i].event_name + '<br>');
             $('#message-container').append('Start Date: ' + data[i].start_date + '<br>');
             $('#message-container').append('Status: ' + data[i].status + '<br>');

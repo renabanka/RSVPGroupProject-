@@ -130,6 +130,7 @@ function insertIntoUserAccountsTable(req, res, next) {
 //function insertIntoEventsTable: inputs event details into our events table
 function insertIntoEventsTable(req, res, next) {
     console.log(req.body);
+    var eventAttendence = req.body;
 
     var event = new EventModel(req.body).save().then(function(data) {
         res.render('userprofile', data.attributes);
@@ -143,6 +144,7 @@ function insertIntoEventsAttendance(req, res, next) {
     var eventAttendence = req.body;
     eventAttendence.user_id = req.session.user_id;
     eventAttendence.name = req.session.name;
+
 
     var attendance = new EventAttendance(eventAttendence).save().then(function(data) {
         res.redirect('home');
