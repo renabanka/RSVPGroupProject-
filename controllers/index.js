@@ -20,7 +20,7 @@ router.get('/register', renderRegister);
 router.get('/login', renderLogin);
 
 //Home Page
-router.get('/home', renderAll);
+router.get('/home', renderAll, renderAllEventAttendance);
 
 //Event Attendance Page
 router.get('/eventattendance', renderAllEventAttendance);
@@ -101,7 +101,7 @@ function renderAllEventAttendance(req, res, next) {
 
         };
         console.log(resJson);
-        res.render('eventattendance', resJson);
+        // res.render('eventattendance', resJson);
     });
 };
 
@@ -202,11 +202,19 @@ function attemptToLogin(req, res, next) {
             req.session.name = result.attributes.name;
             req.session.email = result.attributes.email;
             req.session.user_id = result.attributes.id;
+            console.log(attempt);
             if (attempt === true) {
                 res.redirect('/home');
+
             }
+            else if (attempt === false) {
+                res.render('loginfail')
+
+            }
+
             else {
                 res.render('loginfail')
+                console.log(attempt)
             }
         });
 

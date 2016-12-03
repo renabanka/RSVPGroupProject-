@@ -30,6 +30,8 @@ create table event_attendance (
     end_time TIME,
     start_date text,
     end_date text,
+    image LONGTEXT,
+
 
     name VARCHAR(255),
     primary key(id)
