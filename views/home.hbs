@@ -35,19 +35,7 @@
 
 
 {{#each events}}
-    <div class="attendees">
-        <h6><b>Attendees:</b></h6>
-        {{#each event_attendance}}
 
-            <article>
-                <b>{{this.name}}</b> has RSVP'd to <b>{{this.event_name}}</b>
-                (They left this comment: {{this.comments}})
-
-            </article>
-        {{/each}}
-        <div id='message-container1'></div>
-
-    </div>
         <img class='eventimage' src='{{this.image}}'><br>
     <!--<img class='eventimage' src='{{this.image}}' height="200" width="450"><br>-->
         <b>Event Name:</b> {{this.event_name}}<br>
@@ -57,14 +45,7 @@
         <b>End Time:</b> {{this.end_time}}<br>
         <b>Description:</b> {{this.description}}<br>
         <b>Location:</b> {{this.location}}<br><br>
-    {{#each event_attendance}}
 
-        <article>
-            <b>{{this.name}}</b> has RSVP'd to <b>{{this.event_name}}</b>
-            (They left this comment: {{this.comments}})
-
-        </article>
-    {{/each}}
 
 
 

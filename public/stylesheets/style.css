@@ -90,7 +90,8 @@ p {
   font-family: 'Pacifico', cursive;
   font-size: 75px;
   text-align:center;
-  margin-top: 100px;
+  margin-top: 200px;
+  padding-top:25px;
 }
 
 .headername {
@@ -105,8 +106,8 @@ p {
 }
 
 .registerbutton {
-        background-color: transparent;
-    border-color: white;
+   background-color: transparent;
+   border-color: white;
    margin-left:auto;
    margin-right:auto;
    display:block;
@@ -115,7 +116,7 @@ p {
 
 .loginbutton {
   background-color: transparent;
-    border-color: white;
+  border-color: white;
   margin-left:auto;
   margin-right:auto;
   display:block;
@@ -346,6 +347,70 @@ video {
 }
 
 
+@media (min-width: 550px) {
+    .headername {
+        color: #48739d; /* fallback for old browsers */
+        color: -webkit-linear-gradient(to left, #5C258D , #4389A2); /* Chrome 10-25, Safari 5.1-6 */
+        color: linear-gradient(to left, #5C258D , #4389A2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        font-family: 'Pacifico', cursive;
+        font-size: 75px;
+        position: absolute;
+        display: inline-block;
+        /*text-align: center;*/
+        display: inline-block;
+        transform: translateX(-50%);
+        visibility: hidden;
+
+    }
+
+
+    header { color: #333333; line-height: 108px;
+        /*visibility: hidden;*/
+    }
+
+
+    header nav {
+        font-size: 12px; float: right;
+        margin-right: 1%;
+        margin-top: -10px;
+        /*visibility: hidden;*/
+    }
+
+    header nav a {
+        /*color: #333; margin: 0 5px;*/
+        text-decoration: none;
+        padding: 5px;
+        /*visibility: hidden;*/
+
+    }
+
+    .homebuttonbox {
+        display: inline-block;
+        text-align: center;
+        background: rgba(255,255,255,.9);
+        padding: 50px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 10px;
+        border-color: #EFEFEE;
+        border-style: solid;
+        border-width: 2px;
+        width: 70%;
+
+
+    }
+
+    .eventimage {
+        height: 200px;
+        width:285px;
+    }
+}
+
+
+}
+
+
 @media (max-width: 480px) {
     .headername {
         color: #48739d; /* fallback for old browsers */
@@ -408,3 +473,14 @@ video {
 }
 
 
+.homepagediv {
+    background-color: #0B0C1A;
+    width: 400px;
+    height: 350px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    border-radius: 5px;
+
+
+}
