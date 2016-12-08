@@ -102,6 +102,14 @@ function renderAllEventAttendance(req, res, next) {
         };
         console.log(resJson);
         res.render('eventattendance', resJson);
+//         try {
+//     eventAttendence.user_id = req.session.user_id;
+//     eventAttendence.name = req.session.name;
+// } catch (error) {
+//     console.log('insertIntoEventsAttendance Error:');
+//     console.log(error);
+//     eventAttendence.user_id = '1';
+// }
     });
 };
 
