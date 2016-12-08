@@ -101,7 +101,7 @@ function renderAllEventAttendance(req, res, next) {
 
         };
         console.log(resJson);
-        // res.render('eventattendance', resJson);
+        res.render('eventattendance', resJson);
     });
 };
 
